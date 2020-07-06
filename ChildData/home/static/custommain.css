@@ -1,0 +1,58 @@
+.finputs {
+  min-width: 220px;
+}
+
+.whole-back {
+  background-color: #f5f5f5;
+}
+
+.main-back {
+  background-color: white;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #849e61;
+  border-color: #849e61;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #849e61;
+  border-color: #849e61;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #687c4c;
+  border-color: #687c4c;
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(132, 158, 97, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(132, 158, 97, 0.5);
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(132, 158, 97, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(132, 158, 97, 0.5);
+}
+
+.form-control:focus {
+  border-color: #aacc7c;
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(132, 158, 97, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(132, 158, 97, 0.5);
+}
+
+input[type="checkbox"]:checked {
+  color: #687c4c;
+  border-color: red;
+  background-color: red;
+}
+
+/*# sourceMappingURL=custommain.css.map */

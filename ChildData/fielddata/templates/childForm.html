@@ -1,0 +1,443 @@
+{% extends "home/header.html" %}
+{% load static %}
+{% block content %}
+<html>
+
+<head>
+    <title>Add a new child</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'custommain.css' %}" />
+</head>
+
+
+<body class="whole-back">
+    <main class="">
+        <div class="container main-back grid pt-5 pb-5">
+            <div class="form-group grid">
+
+                <form method="post" action="" enctype="multipart/form-data" id="field_form" class="">
+                    {% csrf_token %}
+                    <div class="form-part">
+                        <div class="part-header row mt-4 ">
+                            <div class="col-sm-12">
+                                <h3>General Details</h3>
+                            </div>
+
+                        </div>
+                        <div class="part-body">
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Child Name*:</label></div>
+                                <div class="col-sm-10">{{forms.Child_name}}</div>
+                            </div>
+                            <div class="row  mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Gender*:</label></div>
+                                <div class="col-sm-3">{{forms.Gender}}</div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-2"><label for="">Photo*:</label></div>
+                                <div class="col-sm-3">{{forms.photo}}</div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-sm-2"><label for="">Description*:</label></div>
+                                <div class="col-sm-10">{{forms.Description}}</textarea></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-part">
+                        <div class="part-header row mt-4 pt-4">
+                            <div class="col-sm-12 mt-4">
+                                <h3>Personal Details</h3>
+                            </div>
+                        </div>
+                        <div class="part-body">
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Date of Birth*:</label></div>
+                                <div class="col-sm-3">{{forms.Date_of_Birth}}</div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-2"><label for="">Blood group*:</label></div>
+                                <div class="col-sm-3">{{forms.Blood_Group}}</div>
+                            </div>
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Birth Place*:</label></div>
+                                <div class="col-sm-3">{{forms.Birth_place}}</div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-2"><label for="">Nationality*:</label></div>
+                                <div class="col-sm-3">{{forms.Nationality}}</div>
+                            </div>
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Mother Tongue*:</label></div>
+                                <div class="col-sm-3">{{forms.Mother_Tongue}}</div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-2"><label for="">Religion*:</label></div>
+                                <div class="col-sm-3">{{forms.Religion}}</div>
+                            </div>
+
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">National Identity Card Type*:</label></div>
+                                <div class="col-sm-3">{{forms.National_Identity_card_type}}</div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-2"><label for="">National ID Card Number*:</label></div>
+                                <div class="col-sm-3">{{forms.National_ID_Card_Number}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-part">
+                        <div class="part-header mt-4 pt-4">
+                            <h3>Contact Details</h3>
+                        </div>
+                        <div class="part-body">
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Permanent Address*:</label></div>
+                                <div class="col-sm-3">{{forms.Permanent_Address}}</div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-2"><label for="">Present Address*:</label></div>
+                                <div class="col-sm-3">{{forms.Present_Address}}</div>
+                            </div>
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">City*:</label></div>
+                                <div class="col-sm-3">{{forms.City}}</div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-2"><label for="">State*:</label></div>
+                                <div class="col-sm-3">{{forms.State}}</div>
+
+                            </div>
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Zip*:</label></div>
+                                <div class="col-sm-3">{{forms.Zip}}</div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-2"><label for="">Country*:</label></div>
+                                <div class="col-sm-3">{{forms.Country}}</div>
+                            </div>
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Mobile*:</label></div>
+                                <div class="col-sm-3">{{forms.Mobile}}</div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-2"><label for="">Phone*:</label></div>
+                                <div class="col-sm-3">{{forms.Phone}}</div>
+                            </div>
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Email*:</label></div>
+                                <div class="col-sm-10">{{forms.Email}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-part">
+                        <div class="part-header mt-4 pt-4">
+                            <h3>Relationship Details</h3>
+                        </div>
+                        <div class="part-body">
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Fathers Name*:</label></div>
+                                <div class="col-sm-10">{{forms.Fathers_Name}}</div>
+                            </div>
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Fathers Contact Number*:</label></div>
+                                <div class="col-sm-3">{{forms.Fathers_Contact_Number}}</div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-2"><label for="">Fathers Profession*:</label></div>
+                                <div class="col-sm-3">{{forms.fathers_Profession}}</div>
+                            </div>
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Fathers National ID Card type*:</label></div>
+                                <div class="col-sm-3">{{forms.Fathers_National_ID_Card_type}}</div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-2"><label for=""><label for="">Fathers National ID Card
+                                            Number*:</label></label></div>
+                                <div class="col-sm-3">{{forms.Fathers_National_ID_Card_Number}}</div>
+                            </div>
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Mothers Name*:</label></div>
+                                <div class="col-sm-10">{{forms.Mothers_Name}}</div>
+                            </div>
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Mothers Contact Number*:</label></div>
+                                <div class="col-sm-3">{{forms.Mothers_Contact_Number}}</div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-2"><label for="">Mothers Profession*:</label></div>
+                                <div class="col-sm-3">{{forms.Mothers_Profession}}</div>
+                            </div>
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Mothers National ID Card Type*:</label></div>
+                                <div class="col-sm-3">{{forms.Mothers_National_ID_Card_type}}</div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-2"><label for=""><label for="">Mothers National ID Card
+                                            Number*:</label></div>
+                                <div class="col-sm-3">{{forms.Mothers_National_ID_Card_Number}}</div>
+                            </div>
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Local Parents Name*:</label></div>
+                                <div class="col-sm-10">{{forms.Local_Parents_Name}}</div>
+                            </div>
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Local Parents Contact Number*:</label></div>
+                                <div class="col-sm-3">{{forms.Local_Parents_Contact_Number}}</div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-2"><label for="">Local Parents Profession*:</label></div>
+                                <div class="col-sm-3">{{forms.Local_Parents_Profession}}</div>
+                            </div>
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Local Parents National ID Card Type*:</label></div>
+                                <div class="col-sm-3">{{forms.Local_Parents_National_ID_Card_type}}</div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-2"><label for=""><label for="">Local Parents National ID Card
+                                            Number*:</label></div>
+                                <div class="col-sm-3">{{forms.Local_Parents_National_ID_Card_Number}}</div>
+                            </div>
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Relationship*:</label></div>
+                                <div class="col-sm-3">{{forms.Relationship}}</div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-2"><label for="">Income*:</label></div>
+                                <div class="col-sm-3">{{forms.Income}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-part">
+                        <div class="part-header mt-4 pt-4">
+                            <h3>Schooling</h3>
+                        </div>
+                        <div class="part-body">
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">School Name*:</label></div>
+                                <div class="col-sm-10">{{forms.School_Name}}</div>
+                            </div>
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Grade*:</label></div>
+                                <div class="col-sm-3">{{forms.Grade}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-part">
+                        <div class="part-header mt-4 pt-4">
+                            <h3>Adoption Fee</h3>
+                        </div>
+                        <div class="part-body">
+                            <div class="row mt-4 mb-2">
+                                <div class="col-sm-2"><label for="">Clothing*:</label></div>
+                                <div class="col-sm-3">{{forms.clothing}}</div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-2"><label for="">Education*:</label></div>
+                                <div class="col-sm-3">{{forms.education}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-footer row mt-4 pt-4 mb-2">
+                            
+                        <div class="col-sm-3">
+                            <input type="submit" name="btnSubmit" value="Submit" class="btn btn-primary">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Child_name");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Gender");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Description");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Date_of_Birth");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Blood_Group");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Birth_place");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Nationality");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Mother_Tongue");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Religion");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_National_Identity_card_type");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_National_ID_Card_Number");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Permanent_Address");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Present_Address");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_City");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_State");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Zip");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Country");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Mobile");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Phone");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Email");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Fathers_Name");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Fathers_Contact_Number");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_fathers_Profession");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Fathers_National_ID_Card_type");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Fathers_National_ID_Card_Number");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Mothers_Name");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Mothers_Contact_Number");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Mothers_Profession");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Mothers_National_ID_Card_type");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Mothers_National_ID_Card_Number");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Local_Parents_Name");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Local_Parents_Contact_Number");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Local_Parents_Profession");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Local_Parents_National_ID_Card_type");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Local_Parents_National_ID_Card_Number");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Relationship");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Income");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_School_Name");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_Grade");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_clothing");
+            fnx.classList.add("form-control");
+        });
+
+        $(document).ready(function () {
+            var fnx = document.getElementById("id_education");
+            fnx.classList.add("form-control");
+        });
+    </script>
+
+</body>
+{% endblock %}
+
+</html>

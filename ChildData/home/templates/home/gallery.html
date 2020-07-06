@@ -1,0 +1,103 @@
+{% extends "home/header.html" %}
+{% block content%}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Gallery</title>
+
+    
+    <meta charset="utf-8">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}"/>
+    
+</head>
+<body>
+
+
+
+
+<div class="nav-bar-sep d-lg-none"></div>
+
+<div class="outer-container home-page">
+    <div class="container-fluid">
+        <div class="row">
+            {% for image in photos %}
+                {% if image.photo %}
+                <div class="col-12 col-md-6 col-lg-3 py-3">
+                <div class="portfolio-content">
+                    {% if image.adopt %}
+                    
+                    <img src="{% static 'user/adopted.png'%}" alt="adopted" style="position:absolute; z-index:100; width:50%; height: 50%;     transform: translate(100%,100%);" >
+                    <figure>
+                        <img style="width: 100%; 
+                        height: 300px;
+                        object-fit: cover;
+                        padding:1px;
+                        border:1px solid #021a40;
+                        background-color:#7cc7b9;
+                        filter: grayscale(100%);" 
+                        src="{{image.photo.url}}" alt="">
+                    </figure>
+                    {% else %}
+                    <figure>
+                            <img style="width: 100%; 
+                            height: 300px;
+                            object-fit: cover;
+                            padding:1px;
+                            border:1px solid #021a40;
+                            background-color:#7cc7b9;
+                            " 
+                            src="{{image.photo.url}}" alt="">
+                        </figure>
+                    {% endif %}
+
+                    <div class="entry-content flex flex-column align-items-center justify-content-center">
+                        <h3><a href="/child/{{image.Child_Id}}">{{image.Child_name}}</a></h3>
+
+                        <ul class="flex flex-wrap justify-content-center">
+                            <li>{{image.Gender}},</a></li>
+                            <li >{{image.Date_of_Birth}}</a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+            
+            
+        </div><!-- .row -->
+    </div><!-- .container-fluid -->
+</div><!-- .outer-container -->
+
+
+<script type='text/javascript'>
+
+(function($) {
+    'use strict';
+
+    // Main Navigation
+    $( '.hamburger-menu' ).on( 'click', function() {
+        $(this).toggleClass('close');
+        $('.site-branding').toggleClass('hide');
+        $('.site-navigation').toggleClass('show');
+        $('.site-header').toggleClass('no-shadow');
+    });
+
+    // Scroll to Next Section
+    $( '.scroll-down' ).click(function() {
+        $( 'html, body' ).animate({
+            scrollTop: $( '.scroll-down' ).offset().top + 100
+        }, 800 );
+    });
+})(jQuery);
+
+</script>
+
+</body>
+</html>
+
+{% endblock content%}

@@ -1,0 +1,11 @@
+hoste/
+.idea/
+ChildData/db.sqlite3
+ChildData/ChildData/__pycache__/
+ChildData/fielddata/__pycache__/
+mediafiles/
+ChildData/testing/
+ChildData/home/__pycache__/
+ChildData/payment/__pycache__/
+ChildData/users/__pycache__/
+

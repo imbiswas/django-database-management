@@ -1,0 +1,96 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-align: center;
+  -ms-flex-pack: center;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-control {
+  position: relative;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show > .btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #849e61;
+  border-color: #849e61;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #849e61;
+  border-color: #849e61;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #687c4c;
+  border-color: #687c4c;
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(132, 158, 97, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(132, 158, 97, 0.5);
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(132, 158, 97, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(132, 158, 97, 0.5);
+}
+
+.form-control:focus {
+  border-color: #aacc7c;
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(132, 158, 97, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(132, 158, 97, 0.5);
+}
+
+.main-back {
+  background-color: white;
+}
+
+form .message {
+  color: #b3b3b3;
+  font-size: 12px;
+}
+form .message a {
+  color: #849e61;
+  text-decoration: none;
+}
+/*# sourceMappingURL=signin.css.map */

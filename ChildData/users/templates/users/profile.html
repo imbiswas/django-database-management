@@ -1,0 +1,762 @@
+{% extends "home/header.html" %}
+{% block content%}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <title>{{user.username}} | Profile</title>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+  <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'user/style.css' %}" />
+  <!-- <link rel="stylesheet" type="text/css" href="{% static 'docs.css' %}" /> -->
+  <!-- <link rel="stylesheet" type="text/css" href="{% static 'lightbox.css' %}" /> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.green.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+
+  <script>
+    less = {
+      env: "development",
+      relativeUrls: false,
+      rootpath: "../assets/"
+    };
+  </script>
+
+
+  <style type="text/css">
+    .jqstooltip {
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      visibility: hidden;
+      background: rgb(0, 0, 0) transparent;
+      background-color: rgba(0, 0, 0, 0.6);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+      color: white;
+      font: 10px arial, san serif;
+      text-align: left;
+      white-space: nowrap;
+      padding: 5px;
+      border: 1px solid white;
+      z-index: 10000;
+    }
+
+    .jqsfield {
+      color: white;
+      font: 10px arial, san serif;
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body class="whole-back">
+  <main>
+    <div class="d-flex" id="wrapper">
+
+      <!-- Sidebar -->
+      <div class="bg-light border-right" id="sidebar-wrapper">
+
+        <div class="sidebar-heading">
+          <div class="media user-media dker">
+            <div class="user-media-toggleHover">
+              <span class="fa fa-user"></span>
+            </div>
+            <div class="user-wrapper">
+              <div class="row">
+                <div class="col-sm-5">
+                  <a href="#profile_picture">
+                    <img class="media-object img-thumbnail user-img" alt="User Picture" style="width: 80px; 
+                    height: 80px;
+                    object-fit: cover;
+                    padding:1px;
+                    border:1px solid #021a40;
+                    background-color:#7cc7b9;" src="{{ user.profile.Profile_picture.url}}">
+                  </a>
+                  <!-- <div class="lightbox-target" id="profile_picture">
+                    <img class="media-object img-thumbnail user-img" alt="User Picture" style="max-height: 600px;
+                    max-width: 600px;
+                    object-fit: cover;"  src="{{ user.profile.Profile_picture.url}}">
+                    <a class="lightbox-close" href="#"></a>
+                 </div> -->
+
+                </div>
+                <div class="col-sm-7" style="padding: 0; object-fit: scale-down;">
+                  <!-- <div class="media-body"> -->
+
+                  <div class="grade">
+                    <p class="" style="font-size:smaller;"> <b>
+                        {{user.username}}</b></p>
+                    <p class="" style="font-size:smaller; line-height: 1;"> {{user.first_name}}
+                      {{user.last_name}}
+                    </p>
+                    <p class="" style="font-size:xx-small; line-height: 1;"> {{user.email}} </p>
+                  </div>
+
+
+                  <!-- </ul> -->
+                  <!-- </div> -->
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+        <div class="list-group list-group-flush">
+          <ul class="nav flex-column">
+            <li class="nav-divider"></li>
+            <li class="nav-item">
+              <a href="#" class="nav-link list-group-item list-group-item-action bg-light disabled">Menu</a></li>
+            </li>
+            <li>
+              <a href="#" class="nav-link list-group-item list-group-item-action bg-light"
+                onclick="adoptFunction()">Adopt List</a>
+            </li>
+            <li><a href="#" class="nav-link list-group-item list-group-item-action bg-light"
+                onclick="profileFunction()">My Profile</a>
+            </li>
+            {% if user.is_staff %}
+            <li><a href="#" class="nav-link list-group-item list-group-item-action bg-light" onclick="tableFunction()">
+                {% if user.is_superuser %}
+                All Data
+                {% else %}
+                My Entries
+                {% endif %}
+              </a>
+            </li>
+            <li><a href="{% url 'add_form'%}" class="nav-link list-group-item list-group-item-action bg-light">Add
+                Data</a>
+            </li>
+            {% endif %}
+            <li><a href="#" class="nav-link list-group-item list-group-item-action bg-light"
+                onclick="accountFunction()">Account</a>
+            </li>
+          </ul>
+
+
+
+
+
+
+        </div>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+
+
+        <button class="btn btn-sm btn-primary" style="margin-top: 2px;margin-left: 2px;position: absolute;"
+          id="menu-toggle"><i class="fas fa-arrows-alt-h"></i></button>
+        <div class="wrapper">
+          <div class="container main-back pt-5 pb-5">
+
+
+            <div class="part-outer" id="adopt" style="display:none;">
+              <div class="part pb-5">
+                <div class="part-header">
+                  <h3 class="text-center">Adopt</h3>
+                </div>
+                <div class="part-body grid">
+                  <div class="row">
+                    {% for adopt_data in adopt_list %}
+                    <div class="col-md-6 col-lg-4 col-sm-12 text-center">
+                      <img src="{{adopt_data.link}}" alt=""
+                        style="width: 100%; height: 300px; object-fit: cover; padding:1px; border:1px solid #021a40; background-color:#7cc7b9;"
+                        class="img-thumbnail" />
+                      <br />
+                      <span><a href="/child/{{adopt_data.Child_id}}">{{adopt_data.Child_name}}</a></span>
+                      <p><a class="view">{{ adopt_data.Gender }}</a></p>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+
+              <div class="part-body pb-">
+                <div class="adoption-carousel">
+                  <div class="owl-carousel owl-theme">
+                    {% for data in datas %}
+                    {% if not data.adopt %}
+                    <div class="item">
+                      <a href="/child/{{data.Child_Id}}" class="btn btn-danger"
+                        style="position: absolute; z-index: 100; bottom: 20; right: 20;">Adopt</a>
+                      <img src=" {{data.photo.url}}" alt=""
+                        style="height:150px;object-fit: cover; object-position: center;">
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="part-outer" id="profile" style="display:none;">
+              <div class="part pb-5">
+                <div class="part-header">
+                  <h3 class="text-center">General Account Settings</h3>
+                </div>
+                <div class="part-body grid">
+                  <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                      <div class="table-holder table-responsive-md pt-4">
+                        <table class="table table-hover">
+
+                          <tbody>
+                            <tr>
+                              <th class="">Username:</th>
+                              <td>{{user.username}}</td>
+                            </tr>
+                            <tr>
+                              <th class="">First Name:</th>
+                              <td>{{user.first_name}}</td>
+                            </tr>
+                            <tr>
+                              <th class="">Last Name:</th>
+                              <td>{{user.last_name}}</td>
+                            </tr>
+                            <tr>
+                              <th class="">E-mail:</th>
+                              <td>
+                                {% if user.email is not None %}
+                                {{user.email}}
+                                {% else %}
+                                -
+                                {% endif %}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="part pb-5">
+                <div class="part-header">
+                  <h3 class="text-center">General Info</h3>
+                </div>
+                <div class="part-body grid">
+                  <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                      <div class="table-holder table-responsive-md">
+                        <table class="table table-hover">
+                          <thead class="">
+                            <tr>
+                              <td colspan="2" style="border-top:none;">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary btn-sm mb-2 mr-2 mt-2 ml-2"
+                                  data-toggle="modal" data-target="#editmodal" style="float:right;">
+                                  Edit
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="editmodal" tabindex="-1" role="dialog"
+                                  aria-labelledby="editingmodal" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="editingmodal">
+                                          Edit your
+                                          profile.</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <div class="wrapper">
+                                          <form class="login-form" action="/users/edit" method="post">
+                                            {% csrf_token %}
+                                            <div id="div_id_phone" class="form-group">
+                                              <label for="id_phone" class="col-form-label ">
+                                                Phone
+                                              </label>
+                                              <div class="">
+                                                <input type="number" value="{{instance.phone}}" name="phone" step="1"
+                                                  class="numberinput form-control" id="id_phone" required>
+                                              </div>
+                                            </div>
+                                            <div id="div_id_Gender" class="form-group">
+                                              <label for="id_Gender" class="col-form-label ">
+                                                Gender
+                                              </label>
+                                              <div class="">
+                                                <select name="Gender" class="select form-control" id="id_Gender"
+                                                  required>
+                                                  <option value="" selected="selected">
+                                                    ---------
+                                                  </option>
+                                                  <option value="Male">
+                                                    Male</option>
+                                                  <option value="Female">
+                                                    Female</option>
+                                                  <option value="Other">
+                                                    Other</option>
+                                                  <option value="Prefer not to specify">
+                                                    Prefer not to
+                                                    specify</option>
+                                                </select>
+                                              </div>
+                                            </div>
+                                            <div id="div_id_address" class="form-group">
+                                              <label for="id_address" class="col-form-label ">
+                                                Address
+                                              </label>
+                                              <div class="">
+                                                <input type="text" name="address" value="{{instance.address}}" cols="40"
+                                                  rows="10" maxlength="50" class="textarea form-control" id="id_address"
+                                                  required>
+                                              </div>
+                                            </div>
+                                            <div id="div_id_Date_of_Birth" class="form-group">
+                                              <label for="id_Date_of_Birth" class="col-form-label ">
+                                                Date of Birth
+                                              </label>
+                                              <div class="">
+                                                <input type="text" value="{{instance.Date_of_Birth}}"
+                                                  name="Date_of_Birth" class="dateinput form-control"
+                                                  id="id_Date_of_Birth" required>
+                                              </div>
+                                            </div>
+                                            <div id="div_id_Nationality" class="form-group">
+                                              <label for="id_Nationality" class="col-form-label ">
+                                                Nationality
+                                              </label>
+                                              <div class=""> <input type="text" value="{{instance.Nationality}}"
+                                                  name="Nationality" maxlength="10"
+                                                  class="textinput textInput form-control" id="id_Nationality" required>
+                                              </div>
+                                            </div>
+                                            <div id="div_id_Religion" class="form-group"> <label for="id_Religion"
+                                                class="col-form-label ">
+                                                Religion
+                                              </label>
+                                              <div class="">
+                                                <select name="Religion" class="select form-control" id="id_Religion"
+                                                  required>
+                                                  <option value="" selected="selected">
+                                                    ---------
+                                                  </option>
+                                                  <option value="Hinduism">
+                                                    Hinduism
+                                                  </option>
+                                                  <option value="Buddhism">
+                                                    Buddhism
+                                                  </option>
+                                                  <option value="Islam">
+                                                    Islam</option>
+                                                  <option value="Cristianity">
+                                                    Cristianity
+                                                  </option>
+                                                  <option value="Other">
+                                                    Other</option>
+                                                </select>
+                                              </div>
+                                            </div>
+                                          </form>
+                                        </div>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                          data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save
+                                          changes</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th class="">Phone:</th>
+                              <td>
+                                {% if user.profile.phone is not None %}
+                                {{ user.profile.phone}}
+                                {% else %}
+                                -
+                                {% endif %}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th class="">Address:</th>
+                              <td>
+                                {% if user.profile.address is not None %}
+                                {{ user.profile.address}}
+                                {% else %}
+                                -
+                                {% endif %}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th class="">Gender:</th>
+                              <td>
+                                {% if user.profile.Gender is not None %}
+                                {{ user.profile.Gender}}
+                                {% else %}
+                                -
+                                {% endif %}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th class="">DOB:</th>
+                              <td>
+                                {% if user.profile.Date_of_Birth is not None %}
+                                {{ user.profile.Date_of_Birth}}
+                                {% else %}
+                                -
+                                {% endif %}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th class="">Nationality:</th>
+                              <td>
+                                {% if user.profile.Nationality is not None %}
+                                {{ user.profile.Nationality}}
+                                {% else %}
+                                -
+                                {% endif %}
+                              </td>
+                            </tr>
+                            <tr>
+                              <th class="">Religion:</th>
+                              <td>
+                                {% if user.profile.Religion is not None %}
+                                {{ user.profile.Religion}}
+                                {% else %}
+                                -
+                                {% endif %}
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% if user.is_staff %}
+            <div class="part-outer" id="all" style="display:none;">
+              <div class="part pb-5">
+                <div class="part-header">
+                  <h3 class="text-center">All Data</h3>
+                </div>
+                <div class="part-body grid">
+                  <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                      <div class="table-holder table-responsive-md">
+                        <table class="table table-hover">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">Name</th>
+                              <th scope="col">Gender</th>
+                              <th scope="col">Date of Birth</th>
+                              <th scope="col">Adopt Status</th>
+                          </thead>
+                          <tbody>
+                            {% if user.is_superuser %}
+                            {%for data in datas %}
+                            <tr>
+                              <td><a href="/child/{{data.Child_Id}}">{{data.Child_name}}</a>
+                              </td>
+                              <td>{{data.Gender}}</td>
+                              <td>{{data.Date_of_Birth}}</td>
+                              <td>{% if data.adopt %}
+                                <span class="label text-danger">Adopted</span>
+                                {% else %}
+                                <span class="label text-success">Available</span>
+                                {% endif %}
+                            </tr>
+                            {% endfor%}
+                          </tbody>
+                          {% else %}
+                          {% for data in my_entry %}
+                          <tr>
+                            <td><a href="/child/{{data.Child_Id}}">{{data.Child_name}}</a>
+                            </td>
+                            <td>{{data.Gender}}</td>
+                            <td>{{data.Date_of_Birth}}</td>
+                            <td>{% if data.adopt %}
+                              <span class="label text-danger">Adopted</span>
+                              {% else %}
+                              <span class="label text-success">Available</span>
+                              {% endif %}
+                          </tr>
+                          {% endfor %}
+                          {% endif %}
+                        </table>
+                      </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            <div class="part-outer" id="account" style="display:none;">
+              <div class="part pb-5">
+                <div class="part-header">
+                  <h3 class="text-center">General Account Settings</h3>
+                </div>
+                <div class="part-body grid">
+                  <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                      <div class="table-holder table-responsive-md">
+                        <table class="table table-hover">
+                          <thead class="">
+                            <tr>
+                              <td colspan="2" style="border-top:none;">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary btn-sm mb-2 mr-2 mt-2 ml-2"
+                                  data-toggle="modal" data-target="#changemodal" style="float:right;">
+                                  Edit
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="changemodal" tabindex="-1" role="dialog"
+                                  aria-labelledby="changeingmodal" aria-hidden="true">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="changeingmodal">
+                                          Edit your
+                                          profile.</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <div class="wrapper">
+                                          <form action="" method="post">
+                                            {% csrf_token %}
+                                            <div id="div_id_firstname" class="form-group">
+
+                                              <div class="">
+                                                {{profile.first_name |as_crispy_field}}
+                                              </div>
+                                            </div>
+                                            <div id="div_id_firstname" class="form-group">
+
+                                              <div class="">
+                                                {{profile.last_name |as_crispy_field}}
+                                              </div>
+                                            </div>
+                                            <div id="div_id_firstname" class="form-group">
+
+                                              <div class="">
+                                                {{profile.email |as_crispy_field}}
+                                              </div>
+                                            </div>
+
+
+                                          </form>
+                                        </div>
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                          data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save
+                                          changes</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th class="">Username:</th>
+                              <td>{{user.username}}</td>
+                            </tr>
+                            <tr>
+                              <th class="">First Name:</th>
+                              <td>{{user.first_name}}</td>
+                            </tr>
+                            <tr>
+                              <th class="">Last Name:</th>
+                              <td>{{user.last_name}}</td>
+                            </tr>
+                            <tr>
+                              <th class="">E-mail:</th>
+                              <td>{{user.email}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="part mt-5">
+                <div class="part-header">
+                  <h3 class="text-center">Credentials</h3>
+                </div>
+                <div class="part-body grid">
+                  <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                      <div class="table-holder table-responsive-md">
+                        <table class="table table-hover">
+                          <tbody>
+                            <tr>
+                              <th class="">
+                                <p class="mb-2 mr-2 mt-2">Change Password?</p>
+                              </th>
+                              <td><a href="/users/change-password" class="btn btn-sm btn-primary mb-2 mr-2 mt-2 ml-2"
+                                  style="float: right;"> Edit </button></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="col-sm-2"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="footer">
+            <div class="copyright text-center text-muted">
+              <p>
+                © 2019 SYF Nepal. All rights reserved | Design by
+                <a href="https://tech.syfnepal.com/" target="_blank">SYF Tech</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+      </div>
+      <!-- /#wrapper -->
+
+
+      <!-- Menu Toggle Script -->
+
+  </main>
+
+
+
+
+
+  <script>
+    $("#menu-toggle").click(function (e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+  <script>
+    $(document).ready(function () {
+      accountFunction();
+    });
+
+    function profileFunction() {
+      var x = document.getElementById("adopt");
+      var y = document.getElementById("profile");
+      var z = document.getElementById("account");
+      var all = document.getElementById("all");
+      x.style.display = "none";
+      y.style.display = "block";
+      z.style.display = "none";
+      all.style.display = 'none';
+    }
+
+    function accountFunction() {
+      var x = document.getElementById("adopt");
+      var y = document.getElementById("profile");
+      var z = document.getElementById("account");
+      var all = document.getElementById("all");
+
+      x.style.display = "none";
+      y.style.display = "none";
+      z.style.display = "block";
+      all.style.display = 'none';
+    }
+
+    function adoptFunction() {
+      var x = document.getElementById("adopt");
+      var y = document.getElementById("profile");
+      var z = document.getElementById("account");
+      var all = document.getElementById("all");
+
+      x.style.display = "block";
+      y.style.display = "none";
+      z.style.display = "none";
+      all.style.display = 'none';
+    }
+
+    function tableFunction() {
+      var x = document.getElementById("adopt");
+      var y = document.getElementById("profile");
+      var z = document.getElementById("account");
+      var all = document.getElementById("all");
+
+      x.style.display = "none";
+      y.style.display = "none";
+      z.style.display = "none";
+      all.style.display = 'block';
+    }
+  </script>
+
+  <script>
+    $(document).ready(function () {
+      var owl = $('.owl-carousel');
+      owl.owlCarousel({
+        items: 4,
+
+        loop: true,
+        margin: 10,
+        autoplay: true,
+        autoplayTimeout: 2500,
+        autoplayHoverPause: true,
+        navigation: true,
+        responsiveClass: true,
+        responsive: {
+          0: {
+            items: 1,
+            nav: true
+          },
+          600: {
+            items: 3,
+            nav: true
+          },
+          1000: {
+            items: 4,
+            nav: true,
+          }
+        }
+      });
+    })
+    //             
+  </script>
+
+</body>
+
+</html>
+
+{% endblock content%}
